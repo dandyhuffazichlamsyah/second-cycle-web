@@ -15,16 +15,16 @@
     
     <style>
         :root {
-            --sidebar-width: 260px;
+            --sidebar-width: 250px;
             --header-height: 60px;
-            --primary-color: #4e73df;
-            --secondary-color: #858796;
-            --success-color: #1cc88a;
-            --info-color: #36b9cc;
-            --warning-color: #f6c23e;
-            --danger-color: #e74a3b;
-            --dark-color: #5a5c69;
-            --light-color: #f8f9fc;
+            --primary-color: #18181b;
+            --secondary-color: #71717a;
+            --success-color: #10b981;
+            --info-color: #3b82f6;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --dark-color: #09090b;
+            --light-color: #fafafa;
         }
         
         * {
@@ -35,7 +35,7 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f4f6f9;
+            background-color: #fcfcfc;
             overflow-x: hidden;
         }
         
@@ -46,7 +46,8 @@
             left: 0;
             width: var(--sidebar-width);
             height: 100vh;
-            background: linear-gradient(180deg, #4e73df 10%, #224abe 100%);
+            background: #09090b;
+            border-right: 1px solid #1e1e24;
             z-index: 1000;
             transition: all 0.3s ease;
             overflow-y: auto;
@@ -132,22 +133,23 @@
         .sidebar-nav .nav-link {
             display: flex;
             align-items: center;
-            padding: 0.75rem 1rem;
-            color: rgba(255,255,255,0.8);
+            padding: 0.75rem 1.25rem;
+            color: rgba(255,255,255,0.6);
             text-decoration: none;
-            border-radius: 0.5rem;
+            border-radius: 0;
             transition: all 0.2s ease;
         }
         
         .sidebar-nav .nav-link:hover {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05);
             color: white;
         }
         
         .sidebar-nav .nav-link.active {
-            background: rgba(255,255,255,0.2);
+            background: #18181b;
             color: white;
             font-weight: 600;
+            border-left: 2px solid var(--success-color);
         }
         
         .sidebar-nav .nav-link i {
@@ -186,13 +188,12 @@
             height: var(--header-height);
             min-height: var(--header-height);
             background: white;
-            border-bottom: 1px solid #e3e6f0;
+            border-bottom: 1px solid #e4e4e7;
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 0 1.5rem;
             z-index: 999;
-            box-shadow: 0 0.15rem 1.75rem 0 rgba(58,59,69,.15);
         }
         
         .header-left {

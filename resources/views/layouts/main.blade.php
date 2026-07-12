@@ -24,8 +24,7 @@
     <link rel="stylesheet" href="{{ asset('css/vanilla-tilt.css') }}">
     
     <!-- Custom CSS -->
-    <link href="{{ asset('css/tooplate.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/animations.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/modern.css') }}" rel="stylesheet">
     
     <!-- Splide CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
@@ -37,29 +36,10 @@
   <body>
     <!-- Preloader -->
     <div id="preloader">
-      <div class="preloader-content">
-        <div class="spinner">
-          <div class="double-bounce1"></div>
-          <div class="double-bounce2"></div>
-        </div>
-        <div class="loading-text">
-          <span data-text-preloader="S" class="letters-loading">S</span>
-          <span data-text-preloader="E" class="letters-loading">E</span>
-          <span data-text-preloader="C" class="letters-loading">C</span>
-          <span data-text-preloader="O" class="letters-loading">O</span>
-          <span data-text-preloader="N" class="letters-loading">N</span>
-          <span data-text-preloader="D" class="letters-loading">D</span>
-          <span data-text-preloader="C" class="letters-loading">C</span>
-          <span data-text-preloader="Y" class="letters-loading">Y</span>
-          <span data-text-preloader="C" class="letters-loading">C</span>
-          <span data-text-preloader="L" class="letters-loading">L</span>
-          <span data-text-preloader="E" class="letters-loading">E</span>
-        </div>
-      </div>
+      <div class="spinner-minimal"></div>
     </div>
 
-    <main>
-      <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
         <div class="container">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
@@ -187,15 +167,44 @@
         </div>
       </nav>
 
+    <main>
       @yield('content')
     </main>
 
     <footer class="site-footer">
-      {{-- isi dengan footer dari HTML lama --}}
       <div class="container">
+        <div class="row g-4 mb-5">
+          <div class="col-lg-5 col-md-6">
+            <h5 class="fw-bold mb-3">SecondCycle</h5>
+            <p class="text-muted pe-lg-5">Platform terpercaya untuk menemukan motor bekas berkualitas dengan garansi dan inspeksi mendalam. Berkendara aman, nyaman, dan penuh gaya.</p>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <h5 class="fw-bold mb-3">Tautan Cepat</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="{{ route('home') }}" class="site-footer-link">Utama</a></li>
+              <li class="mb-2"><a href="{{ route('about') }}" class="site-footer-link">Kisah Kami</a></li>
+              <li class="mb-2"><a href="{{ route('products.index') }}" class="site-footer-link">Produk Kami</a></li>
+              <li class="mb-2"><a href="{{ route('workshops') }}" class="site-footer-link">Bengkel & Diler</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4 col-md-12">
+            <h5 class="fw-bold mb-3">Kontak & Lokasi</h5>
+            <ul class="list-unstyled text-muted">
+              <li class="mb-2"><i class="ri-map-pin-line me-2 text-primary"></i> Jl. Raya Otomotif No. 45, Jakarta Selatan</li>
+              <li class="mb-2"><i class="ri-phone-line me-2 text-primary"></i> +62 812-3456-7890</li>
+              <li class="mb-2"><i class="ri-mail-line me-2 text-primary"></i> support@secondcycle.com</li>
+            </ul>
+          </div>
+        </div>
+        <hr class="opacity-10 my-4">
         <div class="row">
-          <div class="col-12 text-center">
-            <p class="mb-0">© {{ date('Y') }} SecondCycle. All rights reserved.</p>
+          <div class="col-md-6 text-center text-md-start">
+            <p class="mb-0 text-muted">© {{ date('Y') }} SecondCycle. All rights reserved.</p>
+          </div>
+          <div class="col-md-6 text-center text-md-end mt-2 mt-md-0">
+            <a href="#" class="site-footer-link me-3"><i class="ri-instagram-line"></i></a>
+            <a href="#" class="site-footer-link me-3"><i class="ri-facebook-line"></i></a>
+            <a href="#" class="site-footer-link"><i class="ri-twitter-line"></i></a>
           </div>
         </div>
       </div>
@@ -217,50 +226,23 @@
     <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@16/dist/smooth-scroll.polyfills.min.js"></script>
     
     <!-- Custom JS -->
-    <script src="{{ asset('js/animations.js') }}"></script>
-    <script src="{{ asset('js/custom.js') }}"></script>
-
     <script>
-      // Preloader animation
       document.addEventListener('DOMContentLoaded', function() {
-        // Animate letters
-        const letters = document.querySelectorAll('.letters-loading');
-        letters.forEach((letter, index) => {
-          setTimeout(() => {
-            letter.style.opacity = '1';
-            letter.style.transform = 'translateY(0)';
-          }, 100 * index);
-        });
-
+        const preloader = document.getElementById('preloader');
+        const content = document.querySelector('main');
+        
         // Hide preloader when everything is loaded
         window.addEventListener('load', function() {
-          const preloader = document.getElementById('preloader');
-          const content = document.querySelector('main');
-          
           if (preloader) {
-            // Animate out the preloader
-            gsap.to(preloader, {
-              opacity: 0,
-              duration: 0.8,
-              ease: 'power2.inOut',
-              delay: 1, // Give some time for the letters to animate
-              onComplete: () => {
-                preloader.style.display = 'none';
-                document.body.style.overflow = 'auto'; // Re-enable scrolling
-              }
-            });
+            preloader.style.opacity = '0';
+            preloader.style.transition = 'opacity 0.4s ease';
+            setTimeout(() => {
+              preloader.style.display = 'none';
+            }, 400);
           }
           
-          // Animate in the content
           if (content) {
-            content.style.opacity = '0';
-            gsap.to(content, {
-              opacity: 1,
-              y: 0,
-              duration: 1,
-              delay: 0.5,
-              ease: 'power2.out'
-            });
+            content.classList.add('loaded');
           }
 
           // Initialize AOS after page load
@@ -271,6 +253,16 @@
               easing: 'ease-in-out',
               offset: 100
             });
+          }
+        });
+        
+        // Navbar scrolled state
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', function() {
+          if (window.scrollY > 20) {
+            navbar.classList.add('scrolled');
+          } else {
+            navbar.classList.remove('scrolled');
           }
         });
       });

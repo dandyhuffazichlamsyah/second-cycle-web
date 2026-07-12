@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreProductRequest;
+use App\Http\Requests\Admin\UpdateProductRequest;
 use App\Models\Product;
 use App\Models\Location;
 use Illuminate\Http\Request;
@@ -61,39 +63,8 @@ class ProductController extends Controller
     /**
      * Store a new product
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'brand' => 'required|string|max:100',
-            'model' => 'nullable|string|max:100', // Made nullable as it might be redundant with name
-            'year' => 'nullable|integer|min:2000|max:' . date('Y'), // Kept for backward compatibility if needed, or map to year_manufacture
-            'cc' => 'nullable|integer|min:50|max:2000',
-            'price' => 'required|integer|min:0',
-            'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
-            'location' => 'nullable|string|max:100',
-            // New Fields Validation
-            'year_manufacture' => 'nullable|integer|min:1900|max:'.(date('Y')+1),
-            'year_assembly' => 'nullable|integer|min:1900|max:'.(date('Y')+1),
-            'color' => 'nullable|string|max:50',
-            'tax_expiry' => 'nullable|date',
-            'odometer' => 'nullable|integer|min:0',
-            // Booleans
-            'routine_service' => 'nullable|boolean',
-            'service_book' => 'nullable|boolean',
-            'modifications_legal' => 'nullable|boolean',
-            'accident_history' => 'nullable|boolean',
-            'flood_history' => 'nullable|boolean',
-            'frame_damage' => 'nullable|boolean',
-            'repainted' => 'nullable|boolean',
-            'engine_overhaul' => 'nullable|boolean',
-            'spare_key' => 'nullable|boolean',
-            'toolkit' => 'nullable|boolean',
-            'manual_book' => 'nullable|boolean',
-            'bonus_helmet' => 'nullable|boolean',
-        ]);
-
         $productData = $request->except('image');
         // If 'year' is passed but 'year_manufacture' is not, use 'year'
         if ($request->filled('year') && !$request->filled('year_manufacture')) {
@@ -145,24 +116,8 @@ class ProductController extends Controller
     /**
      * Update product
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'brand' => 'required|string|max:100',
-            'cc' => 'nullable|integer|min:50|max:2000',
-            'price' => 'required|integer|min:0',
-            'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
-            'location' => 'nullable|string|max:100',
-            // New Fields Validation
-            'year_manufacture' => 'nullable|integer|min:1900|max:'.(date('Y')+1),
-            'year_assembly' => 'nullable|integer|min:1900|max:'.(date('Y')+1),
-            'color' => 'nullable|string|max:50',
-            'tax_expiry' => 'nullable|date',
-            'odometer' => 'nullable|integer|min:0',
-        ]);
-
         $productData = $request->except('image');
         // Update slug if name changed
         if ($request->name !== $product->name) {

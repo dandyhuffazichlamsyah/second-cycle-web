@@ -22,63 +22,55 @@
 </div>
 
     <!-- Stats Cards -->
-    <div class="row mb-4">
+    <div class="row g-4 mb-4">
         <div class="col-md-3">
-            <div class="card bg-info text-white">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h4 class="card-title">{{ \App\Models\User::count() }}</h4>
-                            <p class="card-text">Total Pengguna</p>
-                        </div>
-                        <div class="align-self-center">
-                            <i class="fas fa-users fa-2x"></i>
-                        </div>
+            <div class="p-4 bg-white border border-light h-100">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <span class="text-secondary small fw-semibold text-uppercase tracking-wider">Total Pengguna</span>
+                        <h3 class="fw-bold mb-0 mt-2 text-dark">{{ \App\Models\User::count() }}</h3>
+                    </div>
+                    <div class="p-2 bg-light border border-light text-dark">
+                        <i class="fas fa-users"></i>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card bg-primary text-white">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h4 class="card-title">{{ \App\Models\User::where('role', 'customer')->count() }}</h4>
-                            <p class="card-text">Customer</p>
-                        </div>
-                        <div class="align-self-center">
-                            <i class="fas fa-user fa-2x"></i>
-                        </div>
+            <div class="p-4 bg-white border border-light h-100">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <span class="text-secondary small fw-semibold text-uppercase tracking-wider">Customer</span>
+                        <h3 class="fw-bold mb-0 mt-2 text-dark">{{ \App\Models\User::where('role', 'customer')->count() }}</h3>
+                    </div>
+                    <div class="p-2 bg-light border border-light text-dark">
+                        <i class="fas fa-user"></i>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card bg-warning text-white">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h4 class="card-title">{{ \App\Models\User::whereIn('role', ['manager', 'admin'])->count() }}</h4>
-                            <p class="card-text">Admin Staff</p>
-                        </div>
-                        <div class="align-self-center">
-                            <i class="fas fa-user-tie fa-2x"></i>
-                        </div>
+            <div class="p-4 bg-white border border-light h-100">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <span class="text-secondary small fw-semibold text-uppercase tracking-wider">Admin Staff</span>
+                        <h3 class="fw-bold mb-0 mt-2 text-dark">{{ \App\Models\User::whereIn('role', ['manager', 'admin'])->count() }}</h3>
+                    </div>
+                    <div class="p-2 bg-light border border-light text-dark">
+                        <i class="fas fa-user-tie"></i>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card bg-danger text-white">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h4 class="card-title">{{ \App\Models\User::where('role', 'ceo')->count() }}</h4>
-                            <p class="card-text">CEO</p>
-                        </div>
-                        <div class="align-self-center">
-                            <i class="fas fa-crown fa-2x"></i>
-                        </div>
+            <div class="p-4 bg-white border border-light h-100">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <span class="text-secondary small fw-semibold text-uppercase tracking-wider">CEO</span>
+                        <h3 class="fw-bold mb-0 mt-2 text-dark">{{ \App\Models\User::where('role', 'ceo')->count() }}</h3>
+                    </div>
+                    <div class="p-2 bg-light border border-light text-dark">
+                        <i class="fas fa-crown"></i>
                     </div>
                 </div>
             </div>

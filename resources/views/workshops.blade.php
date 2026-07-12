@@ -7,170 +7,102 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="section-padding bg-light">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-6 col-12 mb-4 mb-lg-0">
-        <h1 class="display-4 fw-bold mb-4">Diler & WorkShop Kami</h1>
-        <p class="lead text-muted mb-4">
-          Jaringan dealer dan workshop resmi SecondCycle tersebar di seluruh Indonesia. 
-          Layanan terpercaya dengan teknisi bersertifikat dan suku cadang original.
+<section class="py-5 bg-white border-bottom border-light" style="margin-top: 120px;">
+  <div class="container py-lg-4">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <span class="badge-premium badge-premium-dark mb-2">Jaringan</span>
+        <h1 class="display-5 fw-bold mb-4">Diler & WorkShop Resmi Kami</h1>
+        <p class="text-secondary mb-4 fs-5" style="line-height: 1.7;">
+          Jaringan dealer dan workshop resmi SecondCycle tersebar di seluruh Pulau Jawa. 
+          Setiap lokasi dilengkapi suku cadang original dan teknisi bersertifikat demi kenyamanan berkendara Anda.
         </p>
-        <div class="d-flex gap-3 flex-wrap">
-          <div class="stat-card">
-            <h3 class="fw-bold text-primary">{{ $locations->whereIn('type', ['Dealer', 'Dealer & Service', 'Dealer & Service Center'])->count() }}+</h3>
-            <p class="text-muted mb-0">Lokasi Dealer</p>
+        
+        <div class="d-flex gap-4 pt-3">
+          <div>
+            <h3 class="fw-bold mb-0 text-dark">{{ $locations->whereIn('type', ['Dealer', 'Dealer & Service', 'Dealer & Service Center'])->count() }}</h3>
+            <small class="text-secondary uppercase tracking-wider" style="font-size: 0.7rem; font-weight: 700;">Lokasi Dealer</small>
           </div>
-          <div class="stat-card">
-            <h3 class="fw-bold text-primary">{{ $locations->whereIn('type', ['Service', 'Workshop', 'Dealer & Service', 'Dealer & Service Center'])->count() }}+</h3>
-            <p class="text-muted mb-0">Workshop Resmi</p>
+          <div class="border-start border-light ps-4">
+            <h3 class="fw-bold mb-0 text-dark">{{ $locations->whereIn('type', ['Service', 'Workshop', 'Dealer & Service', 'Dealer & Service Center'])->count() }}</h3>
+            <small class="text-secondary uppercase tracking-wider" style="font-size: 0.7rem; font-weight: 700;">Workshop Resmi</small>
           </div>
         </div>
       </div>
-      <div class="col-lg-6 col-12">
-        <img src="{{ asset('images/dilerdanworkshop.png') }}" class="img-fluid rounded shadow-lg" alt="Diler & Workshop SecondCycle">
+      <div class="col-lg-6">
+        <div class="p-3 bg-light border border-light">
+          <img src="{{ asset('images/dilerdanworkshop.png') }}" class="img-fluid w-100" alt="Diler & Workshop SecondCycle" style="height: 320px; object-fit: cover;" onerror="this.src='https://images.unsplash.com/photo-1616422285623-13ff0162193c?auto=format&fit=crop&w=800&q=80'">
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Filter Section -->
-<section class="section-padding">
+<section class="py-5 bg-white border-bottom border-light">
   <div class="container">
-    <div class="text-center mb-5">
-      <h2 class="fw-bold mb-3">Temukan Lokasi Terdekat</h2>
-      <p class="text-muted">Filter berdasarkan kota dan jenis layanan</p>
+    <div class="row mb-5 justify-content-center">
+      <div class="col-lg-6 text-center">
+        <span class="badge-premium badge-premium-accent mb-2">Lokasi</span>
+        <h2 class="fw-bold">Temukan Cabang Terdekat</h2>
+        <p class="text-secondary">Pilih kota atau jenis layanan untuk mempermudah pencarian.</p>
+      </div>
     </div>
     
-    <div class="row justify-content-center mb-5">
-      <div class="col-lg-8">
-        <div class="filter-container">
-          <div class="row">
-          <div class="col-md-6 col-12">
-            <select class="form-select form-select-lg" id="cityFilter">
-              <option value="">Semua Kota</option>
-              @foreach($locations->pluck('city')->unique()->sort() as $city)
-                <option value="{{ Str::slug($city) }}">{{ $city }}</option>
-              @endforeach
-            </select>
-          </div>
-          <div class="col-md-6 col-12">
-            <select class="form-select form-select-lg" id="typeFilter">
-              <option value="">Semua Jenis</option>
-              @foreach($locations->pluck('type')->unique()->sort() as $type)
-                <option value="{{ Str::slug($type) }}">{{ $type }}</option>
-              @endforeach
-            </select>
-          </div>
-        </div>
-        
-        <div class="row mt-4">
-          <div class="col-12 text-center">
-            <button class="btn btn-primary btn-lg px-5" onclick="scrollToLocations()">
-              <i class="fas fa-search me-2"></i>Cari Lokasi
-            </button>
-          </div>
-        </div>
+    <div class="row g-3 justify-content-center mb-5">
+      <div class="col-md-4 col-12">
+        <select class="form-select" id="cityFilter">
+          <option value="">Semua Kota</option>
+          @foreach($locations->pluck('city')->unique()->sort() as $city)
+            <option value="{{ Str::slug($city) }}">{{ $city }}</option>
+          @endforeach
+        </select>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- Service Features -->
-<section class="section-padding bg-light">
-  <div class="container">
-    <div class="text-center mb-5">
-      <h2 class="fw-bold mb-3">Layanan Unggulan Kami</h2>
-      <p class="text-muted">Keuntungan menggunakan jasa dealer & workshop resmi SecondCycle</p>
-    </div>
-    
-    <div class="row g-4">
-      <div class="col-md-6 col-lg-3">
-        <div class="service-feature-card text-center p-4">
-          <div class="service-icon mb-3">
-            <i class="fas fa-tools fa-3x text-primary"></i>
-          </div>
-          <h5 class="fw-bold mb-2">Teknisi Bersertifikat</h5>
-          <p class="text-muted small">Tim mekanik profesional dengan sertifikat resmi dari pabrikan</p>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-3">
-        <div class="service-feature-card text-center p-4">
-          <div class="service-icon mb-3">
-            <i class="fas fa-cogs fa-3x text-success"></i>
-          </div>
-          <h5 class="fw-bold mb-2">Suku Cadang Original</h5>
-          <p class="text-muted small">Garansi suku cadang asli 100% untuk semua motor</p>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-3">
-        <div class="service-feature-card text-center p-4">
-          <div class="service-icon mb-3">
-            <i class="fas fa-shield-alt fa-3x text-warning"></i>
-          </div>
-          <h5 class="fw-bold mb-2">Garansi Resmi</h5>
-          <p class="text-muted small">Garansi layanan hingga 6 bulan untuk semua perbaikan</p>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-3">
-        <div class="service-feature-card text-center p-4">
-          <div class="service-icon mb-3">
-            <i class="fas fa-clock fa-3x text-info"></i>
-          </div>
-          <h5 class="fw-bold mb-2">Pelayanan Cepat</h5>
-          <p class="text-muted small">Service regular 1-2 jam, booking online tersedia</p>
-        </div>
+      <div class="col-md-4 col-12">
+        <select class="form-select" id="typeFilter">
+          <option value="">Semua Layanan</option>
+          @foreach($locations->pluck('type')->unique()->sort() as $type)
+            <option value="{{ Str::slug($type) }}">{{ $type }}</option>
+          @endforeach
+        </select>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Locations Grid -->
-<section class="section-padding">
+<section class="py-5 bg-white">
   <div class="container">
-    <div class="text-center mb-5">
-      <h2 class="fw-bold mb-3">Lokasi Kami</h2>
-      <p class="text-muted">Dealer dan workshop resmi di kota-kota besar Pulau Jawa</p>
-    </div>
-    
     <div class="row g-4" id="locationsGrid">
       @foreach($locations as $location)
       <div class="col-lg-4 col-md-6 col-12 location-item" 
            data-city="{{ Str::slug($location->city) }}" 
            data-type="{{ Str::slug($location->type) }}">
-        <div class="location-card h-100">
-          <div class="location-image-container">
-            <img src="{{ asset('images/' . ($location->image ?? 'dilerdanworkshop.png')) }}" class="location-image" alt="{{ $location->name }}">
-            <div class="location-badge">
-              <span class="badge-type">{{ $location->type }}</span>
+        <div class="modern-card h-100 d-flex flex-column justify-content-between">
+          <div>
+            <div class="position-relative">
+              <img src="{{ asset('images/' . ($location->image ?? 'dilerdanworkshop.png')) }}" class="modern-card-img" alt="{{ $location->name }}" style="height: 180px;" onerror="this.src='https://images.unsplash.com/photo-1616422285623-13ff0162193c?auto=format&fit=crop&w=600&q=80'">
+              <div class="position-absolute top-0 start-0 p-3">
+                <span class="badge-premium badge-premium-dark">{{ $location->type }}</span>
+              </div>
+            </div>
+            <div class="p-4">
+              <h5 class="fw-bold mb-3">{{ $location->name }}</h5>
+              <div class="small text-secondary mb-3">
+                <p class="mb-2"><i class="ri-map-pin-line me-2 text-dark"></i><strong>{{ $location->city }}</strong></p>
+                <p class="mb-2"><i class="ri-steering-line me-2 text-dark"></i><strong>Layanan CC:</strong> {{ $location->range_cc }}</p>
+                <p class="mb-0"><i class="ri-home-line me-2 text-dark"></i>{{ $location->address }}</p>
+              </div>
             </div>
           </div>
-          <div class="location-body">
-            <h5 class="location-title">{{ $location->name }}</h5>
-            <div class="location-info">
-              <p class="location-detail">
-                <i class="fas fa-map-marker-alt text-primary me-2"></i>
-                <strong>{{ $location->city }}</strong>
-              </p>
-              <p class="location-detail">
-                <i class="fas fa-tachometer-alt text-success me-2"></i>
-                <strong>Range CC:</strong> {{ $location->range_cc }}
-              </p>
-              <p class="location-address">
-                <i class="fas fa-home text-info me-2"></i>
-                {{ $location->address }}
-              </p>
-            </div>
-            <div class="location-actions">
-              <button class="btn btn-outline-primary btn-sm w-100 mb-2" 
-                      onclick="showLocationOnMap('{{ $location->name }}', '{{ $location->city }}')">
-                <i class="fas fa-map me-2"></i>Lihat di Peta
-              </button>
-              <button class="btn btn-primary btn-sm w-100" 
-                      onclick="window.open('tel:+6287769002763', '_self')">
-                <i class="fas fa-phone me-2"></i>Hubungi Kami
-              </button>
-            </div>
+          <div class="p-4 pt-0 d-flex gap-2">
+            <button class="btn btn-outline-dark btn-sm flex-fill" 
+                    onclick="showLocationOnMap('{{ $location->name }}', '{{ $location->city }}')">
+              <i class="ri-map-pin-2-line me-1"></i>Peta
+            </button>
+            <a href="tel:+6287769002763" class="btn btn-primary btn-sm flex-fill text-center">
+              Hubungi
+            </a>
           </div>
         </div>
       </div>
@@ -180,42 +112,18 @@
 </section>
 
 <!-- Map Section -->
-<section class="section-padding bg-light">
+<section class="py-5 bg-white border-top border-light">
   <div class="container">
-    <div class="text-center mb-5">
-      <h2 class="fw-bold mb-3">Peta Lokasi</h2>
-      <p class="text-muted">Temukan dealer dan workshop terdekat dari lokasi Anda</p>
-    </div>
-    
-    <div class="row">
-      <div class="col-12">
-        <div class="map-container">
-          <div id="locationsMap" style="height: 500px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.1);"></div>
-          <div class="mt-3 text-center">
-            <small class="text-muted">
-              <i class="fas fa-info-circle me-1"></i>
-              Klik pada pin untuk melihat detail lokasi. Gunakan scroll untuk zoom in/out.
-            </small>
-          </div>
-        </div>
+    <div class="row mb-4">
+      <div class="col-12 text-center">
+        <h4 class="fw-bold">Peta Interaktif Jaringan</h4>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- CTA Section -->
-<section class="section-padding">
-  <div class="container">
-    <div class="cta-section text-center p-5 rounded">
-      <h3 class="fw-bold mb-3">Butuh Bantuan Menemukan Lokasi?</h3>
-      <p class="text-muted mb-4">Tim customer service kami siap membantu Anda 24/7</p>
-      <div class="d-flex gap-3 justify-content-center flex-wrap">
-        <a href="tel:+6287769002763" class="btn btn-primary btn-lg">
-          <i class="fas fa-phone me-2"></i>Hubungi Sekarang
-        </a>
-        <a href="{{ route('contact.show') }}" class="btn btn-outline-primary btn-lg">
-          <i class="fas fa-envelope me-2"></i>Kirim Pesan
-        </a>
+    <div class="row">
+      <div class="col-12">
+        <div class="border border-light p-2 bg-light">
+          <div id="locationsMap" style="height: 480px;"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -223,16 +131,16 @@
 @endsection
 
 @section('scripts')
+{{-- Wait, Leaflet JS & CSS are loaded in main layout. We just initialize map here. --}}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize Map
     const map = L.map('locationsMap').setView([-6.200000, 106.816666], 9);
     
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
-    // Add markers for all locations
     const locations = @json($locations);
     const markers = {};
 
@@ -245,10 +153,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Expose function to global scope for onclick
     window.showLocationOnMap = function(name, city) {
         const loc = locations.find(l => l.name === name);
-        
         if (loc && loc.latitude && loc.longitude) {
             map.setView([loc.latitude, loc.longitude], 15);
             if (markers[name]) {
@@ -284,11 +190,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     cityFilter.addEventListener('change', filterItems);
     typeFilter.addEventListener('change', filterItems);
-
-    // Scroll function
-    window.scrollToLocations = function() {
-        document.getElementById('locationsGrid').scrollIntoView({ behavior: 'smooth' });
-    };
 });
 </script>
 @endsection

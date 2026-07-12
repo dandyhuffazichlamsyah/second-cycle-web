@@ -22,63 +22,55 @@
 </div>
 
     <!-- Stats Cards -->
-    <div class="row mb-4">
+    <div class="row g-4 mb-4">
         <div class="col-md-3">
-            <div class="card bg-primary text-white">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h4 class="card-title">{{ \App\Models\Product::count() }}</h4>
-                            <p class="card-text">Total Produk</p>
-                        </div>
-                        <div class="align-self-center">
-                            <i class="fas fa-motorcycle fa-2x"></i>
-                        </div>
+            <div class="p-4 bg-white border border-light h-100">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <span class="text-secondary small fw-semibold text-uppercase tracking-wider">Total Produk</span>
+                        <h3 class="fw-bold mb-0 mt-2 text-dark">{{ \App\Models\Product::count() }}</h3>
+                    </div>
+                    <div class="p-2 bg-light border border-light text-dark">
+                        <i class="fas fa-motorcycle"></i>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card bg-success text-white">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h4 class="card-title">{{ \App\Models\Product::distinct('brand')->count('brand') }}</h4>
-                            <p class="card-text">Merek</p>
-                        </div>
-                        <div class="align-self-center">
-                            <i class="fas fa-tags fa-2x"></i>
-                        </div>
+            <div class="p-4 bg-white border border-light h-100">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <span class="text-secondary small fw-semibold text-uppercase tracking-wider">Merek</span>
+                        <h3 class="fw-bold mb-0 mt-2 text-dark">{{ \App\Models\Product::distinct('brand')->count('brand') }}</h3>
+                    </div>
+                    <div class="p-2 bg-light border border-light text-dark">
+                        <i class="fas fa-tags"></i>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card bg-warning text-white">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h4 class="card-title">{{ \App\Models\Product::whereDate('created_at', today())->count() }}</h4>
-                            <p class="card-text">Baru Hari Ini</p>
-                        </div>
-                        <div class="align-self-center">
-                            <i class="fas fa-plus-circle fa-2x"></i>
-                        </div>
+            <div class="p-4 bg-white border border-light h-100">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <span class="text-secondary small fw-semibold text-uppercase tracking-wider">Baru Hari Ini</span>
+                        <h3 class="fw-bold mb-0 mt-2 text-dark">{{ \App\Models\Product::whereDate('created_at', today())->count() }}</h3>
+                    </div>
+                    <div class="p-2 bg-light border border-light text-dark">
+                        <i class="fas fa-plus-circle"></i>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card bg-info text-white">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h4 class="card-title">Rp {{ number_format(\App\Models\Product::sum('price'), 0, ',', '.') }}</h4>
-                            <p class="card-text">Total Nilai</p>
-                        </div>
-                        <div class="align-self-center">
-                            <i class="fas fa-chart-line fa-2x"></i>
-                        </div>
+            <div class="p-4 bg-white border border-light h-100">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <span class="text-secondary small fw-semibold text-uppercase tracking-wider">Total Nilai</span>
+                        <h5 class="fw-bold mb-0 mt-2 text-dark">Rp {{ number_format(\App\Models\Product::sum('price'), 0, ',', '.') }}</h5>
+                    </div>
+                    <div class="p-2 bg-light border border-light text-dark">
+                        <i class="fas fa-chart-line"></i>
                     </div>
                 </div>
             </div>
