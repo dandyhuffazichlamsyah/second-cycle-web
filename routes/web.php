@@ -15,6 +15,19 @@ use App\Http\Controllers\Admin\SystemSettingsController as AdminSystemSettingsCo
 use App\Http\Controllers\Admin\AuditLogController as AdminAuditLogController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+
+Route::get('/run-migrations', function() {
+    try {
+        // Run migrations
+        Artisan::call('migrate', ['--force' => true]);
+        // Run database seeders
+        Artisan::call('db:seed', ['--force' => true]);
+        return "Migrations and seeding executed successfully!";
+    } catch (\Exception $e) {
+        return "Error: " . $e->getMessage();
+    }
+});
 
 use App\Http\Controllers\ReviewController;
 
