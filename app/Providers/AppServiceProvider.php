@@ -15,11 +15,13 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
         Paginator::useBootstrapFive();
+
+        // Fix for Vercel Read-Only Filesystem
+        if (env('VERCEL') || request()->server('VERCEL') || isset($_SERVER['VERCEL'])) {
+            config(['view.compiled' => '/tmp']);
+        }
     }
 }
