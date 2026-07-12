@@ -29,6 +29,15 @@ Route::get('/run-migrations', function() {
     }
 });
 
+Route::get('/test-db', function() {
+    try {
+        \Illuminate\Support\Facades\DB::connection()->getPdo();
+        return "Connected successfully to " . \Illuminate\Support\Facades\DB::connection()->getDatabaseName();
+    } catch (\Exception $e) {
+        return "Database Connection Error: " . $e->getMessage();
+    }
+});
+
 use App\Http\Controllers\ReviewController;
 
 /*
