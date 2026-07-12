@@ -45,4 +45,13 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, Throwable $e)
+    {
+        if (env('VERCEL') || request()->server('VERCEL') || isset($_SERVER['VERCEL'])) {
+            return response($e->getMessage() . "\n\n" . $e->getFile() . ":" . $e->getLine() . "\n\n" . $e->getTraceAsString(), 500)
+                   ->header('Content-Type', 'text/plain');
+        }
+        return parent::render($request, $e);
+    }
 }
